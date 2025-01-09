@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Shape and Dress Suggestions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    overflow: hidden;
+    position: static;
+}
+
+.logo {
+    width: 50px; 
+    height: 50;
+    margin-right: 2em;
+    background-color: #fff;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 60px;
+}
+
+nav li {
+    margin-right: 2em;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease, font-size 0.3s ease;
+    font-size: 16px;
+
+}
+
+nav a:hover {
+    color:rgb(177, 72, 72);
+    transform: translateY(-5px);
+    font-size: 35px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+        body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    label {
+        display: block;
+        margin: 10px 0 5px;
+        margin-left: 26%;
+    }
+    input, button {
+        width: 50%;
+        padding: 8px;
+        margin-bottom: 15px;
+        margin-left: 24%;
+    }
+    button {
+        background-color: #b15151;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #333;
+    }
+    .avatar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+    .avatar i{
+        max-width: 50px;
+        font-size: 50px;
+        color: #ccc;
+        margin: 10px;
+        /* border: 3px solid transparent; */
+        /* border-radius: 50%; */
+        transition: all 0.3s ease-in-out;
+    }
+    .avatar i.active {
+        color: #b15151 ;
+        transform: scale(1.2);
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .suggestions {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #555;
+    }
+    .bodyimg{
+        height: 250px;
+        display: flex;
+        position: relative;
+        left: 32%;
+        box-shadow: 5px 5px 5px #b15151;
+        
+    }
+    .pera{
+        position: relative;
+       
+        left: 1%;
+        bottom: 40%;
+        align-items: center;
+        justify-content: center;
+    }
+    
+        
+    </style>
+</head>
+<body><nav>
+    <img src="b-removebg-preview.png" alt="" class="logo">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="body.html">body type</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+    </ul>
+</nav><br>
+<img src="2ndbg.jpg" alt="" class="bodyimg"><br>
+<p class="pera">Good grooming habits include cleanliness, neatness, and a well-organized style.
+    Regular grooming helps to create a positive impression and showcases our personality.
+    By practicing good grooming, we can feel more comfortable, confident, and prepared to take on the day Grooming is a reflection of one's self-respect and self-care.
+    It plays a significant role in making a good first impression.
+    Proper grooming helps to establish a professional and polished image.
+    Good grooming habits can also impact our mental health and well-being.
+    A well-groomed individual is more likely to feel confident and prepared.
+    Grooming is not just about physical appearance, but also about feeling good.
+    By developing good grooming habits</p><br>
+
+    <h1 style="color: #b15151; margin-left: 30%;">Body Shape and Dress Suggestions</h1>
+
+    <form id="bodyShapeForm">
+        <label for="bust">Bust (in inches):</label>
+        <input type="number" id="bust" name="bust" required>
+        
+        <label for="waist">Waist (in inches):</label>
+        <input type="number" id="waist" name="waist" required>
+        
+        <label for="hips">Hips (in inches):</label>
+        <input type="number" id="hips" name="hips" required>
+        
+        <label for="shoulders">Shoulders (in inches):</label>
+        <input type="number" id="shoulders" name="shoulders" required>
+        
+        <button type="submit">Determine Body Shape</button>
+    </form>
+    
+    <div class="avatar" id="avatar">
+        <!-- Avatars (icons) will be dynamically added here -->
+    </div>
+    <div class="result" id="result"></div>
+    <div class="suggestions" id="suggestions"></div>
+    
+    <script>
+        const form = document.getElementById('bodyShapeForm');
+        const avatarDiv = document.getElementById('avatar');
+        const resultDiv = document.getElementById('result');
+        const suggestionsDiv = document.getElementById('suggestions');
+    
+        // List of body shapes and icons
+        const bodyShapes = [
+            { shape: "Hourglass", icon: "fa-hourglass", alt: "Hourglass Icon" },
+            { shape: "Pear", icon: "fa-leaf", alt: "Pear Icon" },
+            { shape: "Apple", icon: "fa-apple-alt", alt: "Apple Icon" },
+            { shape: "Rectangle", icon: "fa-square", alt: "Rectangle Icon" },
+            { shape: "Inverted Triangle", icon: "fa-arrow-up", alt: "Inverted Triangle Icon" },
+            { shape: "Diamond", icon: "fa-gem", alt: "Diamond Icon" }
+        ];
+
+        const dressSuggestions = {
+            Hourglass: { western: ["hourglass1.jpeg",], eastern: ["hourglass3.jpeg", "hourglass4.jpeg"] },
+            Pear: { western: ["pear1.jpeg", "pear2.jpeg"], eastern: ["pear3.jpeg", "pear4.jpeg"] },
+            Apple: { western: ["apple1.jpeg", "apple2.jpeg"], eastern: ["apple3.jpeg", "apple4.jpeg"] },
+            Rectangle: { western: ["rectangle1.jpeg", "rectangle2.jpeg"], eastern: ["rectangle3.jpeg", "rectangle4.jpeg"] },
+            InvertedTriangle: { western: ["inverted1.jpeg", "inverted2.jpeg"], eastern: ["inverted3.jpeg", "inverted4.jpeg"] },
+            Diamond: { western: ["diamond1.jpeg", "diamond2.jpeg"], eastern: ["diamond3.jpeg", "diamond4.jpeg"] }
+        };
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const bust = parseFloat(document.getElementById('bust').value);
+            const waist = parseFloat(document.getElementById('waist').value);
+            const hips = parseFloat(document.getElementById('hips').value);
+            const shoulders = parseFloat(document.getElementById('shoulders').value);
+    
+            let bodyShape = '';
+
+            if (Math.abs(bust - hips) <= 10 && waist < 0.8 * Math.min(bust, hips)) {
+                bodyShape = "Hourglass";
+            } else if (hips >= 1.2 * bust && waist < hips) {
+                bodyShape = "Pear";
+            } else if (waist >= 1.1 * bust && waist >= 1.1 * hips) {
+                bodyShape = "Apple";
+            } else if (Math.abs(bust - waist) <= 15 && Math.abs(bust - hips) <= 15 && Math.abs(waist - hips) <= 15) {
+                bodyShape = "Rectangle";
+            } else if (bust >= 1.2 * hips && shoulders >= 1.1 * hips) {
+                bodyShape = "Inverted Triangle";
+            } else {
+                bodyShape = "Diamond";
+            }
+
+            avatarDiv.innerHTML = generateIcons();
+            startLoadingAnimation(bodyShape);
+        });
+
+        function generateIcons() {
+            return bodyShapes.map(shape => `
+                <i class="fas ${shape.icon}" alt="${shape.alt}" id="${shape.shape.toLowerCase().replace(/\s+/g, '')}"></i>
+            `).join('');
+        }
+
+        function startLoadingAnimation(finalShape) {
+            const avatars = Array.from(avatarDiv.querySelectorAll('i'));
+            let index = 0;
+
+            const interval = setInterval(() => {
+                avatars.forEach(icon => icon.classList.remove('active'));
+                avatars[index].classList.add('active');
+                index = (index + 1) % avatars.length;
+            }, 500);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                avatars.forEach(icon => icon.classList.remove('active'));
+                document.getElementById(finalShape.toLowerCase()).classList.add('active');
+                resultDiv.textContent = `Your body shape is: ${finalShape}`;
+                askForSuggestions(finalShape);
+            }, 4000);
+        }
+
+        function askForSuggestions(bodyShape) {
+            suggestionsDiv.innerHTML = `
+                <p>Would you like dress suggestions?</p>
+                <button id="yesBtn">Yes</button>
+                <button id="noBtn">No</button>
+            `;
+
+            document.getElementById('yesBtn').addEventListener('click', () => {
+                showSuggestionOptions(bodyShape);
+            });
+
+            document.getElementById('noBtn').addEventListener('click', () => {
+                suggestionsDiv.innerHTML = `<p>Thank you for using our service!</p>`;
+            });
+        }
+
+        function showSuggestionOptions(bodyShape) {
+            suggestionsDiv.innerHTML = `
+                <p>Please choose a style:</p>
+                <button id="westernBtn">Western</button>
+                <button id="easternBtn">Eastern</button>
+            `;
+
+            document.getElementById('westernBtn').addEventListener('click', () => {
+                displaySuggestions(bodyShape, 'western');
+            });
+
+            document.getElementById('easternBtn').addEventListener('click', () => {
+                displaySuggestions(bodyShape, 'eastern');
+            });
+        }
+
+        function displaySuggestions(bodyShape, style) {
+            const suggestions = dressSuggestions[bodyShape][style];
+            suggestionsDiv.innerHTML = `
+                <p>${style.charAt(0).toUpperCase() + style.slice(1)} dress suggestions for ${bodyShape}:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    ${suggestions.map(src => `<img src="${src}" alt="${style} suggestion">`).join('')}
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
